@@ -11,6 +11,7 @@ class Movie {
   final String releaseDate;
   final String title;
   final bool video;
+  final double rating; 
 
   Movie({
     required this.adult,
@@ -25,6 +26,7 @@ class Movie {
     required this.releaseDate,
     required this.title,
     required this.video,
+    required this.rating
   });
 
   // Factory method to create Movie object from JSON
@@ -42,6 +44,7 @@ class Movie {
       releaseDate: json['release_date'] ?? '',
       title: json['title'] ?? '',
       video: json['video'] ?? true,
+      rating: (json['vote_average'] ?? 0.0).toDouble(), // Assuming 'vote_average' is the rating field
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // For date formatting
-import 'movie.dart'; // Import your movie model
+import 'package:intl/intl.dart';
+import 'package:movies_app/models/movie_model.dart'; // For date formatting
+
 
 class MovieDetailsPage extends StatelessWidget {
   final Movie movie;
