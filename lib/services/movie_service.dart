@@ -35,6 +35,24 @@ Future<List<Movie>> fetchPopularMovies() async {
   }
 
 
+ // Fetch movie images from the API
+  Future<List<String>> fetchMovieImages(int movieId) async {
+    final response = await http.get(
+      Uri.parse('https://api.themoviedb.org/3/movie/$movieId/images?api_key=$apiKey'),
+    );
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      List<String> imageUrls = [];
+      
+      for (var image in data['posters']) {
+        imageUrls.add('https://image.tmdb.org/t/p/w500${image['file_path']}');
+      }
+      return imageUrls;
+    } else {
+      throw Exception('Failed to load movie images');
+    }
+  }
   Future<List<Genre>> fetchGenres() async {
     final response = await http.get(Uri.parse('$baseUrl/genre/movie/list?api_key=$apiKey'));
     if (response.statusCode == 200) {
