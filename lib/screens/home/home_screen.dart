@@ -1,16 +1,41 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/models/genre.dart';
 import 'package:movies_app/models/movie_model.dart';
+import 'package:movies_app/models/genre.dart';
 import 'package:movies_app/services/movie_service.dart';
+import 'package:shimmer/shimmer.dart';
+
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Movie App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
 
 class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Genre>> _genres;
   late Future<List<Movie>> _popularMovies;
+  List<String> _carouselImages = [
+    "https://image.tmdb.org/t/p/w500//q7HGGzF32Rfxlm0bChKMkU5mqtM.jpg",
+    "https://image.tmdb.org/t/p/w500//7X7RGxxZXBrU2msm4AtL0v9g9pT.jpg",
+    "https://image.tmdb.org/t/p/w500//5h9LwKp59c2dJEmN7p4ZyMxo0ch.jpg"
+  ];
 
   @override
   void initState() {
@@ -27,6 +52,35 @@ class _HomePageState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
+          // Image Carousel
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: CarouselSlider(
+              items: _carouselImages.map((url) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        image: DecorationImage(
+                          image: NetworkImage(url),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+              options: CarouselOptions(
+                height: 250.0,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 3),
+                enlargeCenterPage: true,
+                viewportFraction: 1.0,
+              ),
+            ),
+          ),
+
           // Genres List
           FutureBuilder<List<Genre>>(
             future: _genres,
@@ -71,12 +125,42 @@ class _HomePageState extends State<HomeScreen> {
             },
           ),
 
-          // Popular Movies List
+          // Popular Movies List with Shimmer effect
           FutureBuilder<List<Movie>>(
             future: _popularMovies,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 150.0,
+                                height: 200.0,
+                                color: Colors.white,
+                              ),
+                              SizedBox(height: 8.0),
+                              Container(
+                                width: 120.0,
+                                height: 16.0,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -136,4 +220,5 @@ class _HomePageState extends State<HomeScreen> {
         ],
       ),
     );
-  }}
+  }
+}
