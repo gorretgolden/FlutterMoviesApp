@@ -4,6 +4,8 @@ import 'package:movies_app/services/download_service.dart';
 
 
 class DownloadsScreen extends StatefulWidget {
+  const DownloadsScreen({super.key});
+
   @override
   _DownloadsScreenState createState() => _DownloadsScreenState();
 }

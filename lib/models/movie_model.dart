@@ -1,56 +1,75 @@
+
 class Movie {
-  final bool adult;
   final String backdropPath;
-  final List<int> genreIds;
   final int id;
-  final String originalLanguage;
+  final String title;
   final String originalTitle;
   final String overview;
-  final double popularity;
   final String posterPath;
+  final String mediaType;
+  final bool adult;
+  final String originalLanguage;
+  final List<int> genreIds;
+  final double popularity;
   final String releaseDate;
-  final String title;
   final bool video;
-  final double rating; 
+  final double voteAverage;
+  final int voteCount;
 
-  Movie({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
-    required this.rating
-  });
+  Movie(
+      {required this.backdropPath,
+      required this.id,
+      required this.title,
+      required this.originalTitle,
+      required this.overview,
+      required this.posterPath,
+      required this.mediaType,
+      required this.adult,
+      required this.originalLanguage,
+      required this.genreIds,
+      required this.popularity,
+      required this.releaseDate,
+      required this.video,
+      required this.voteAverage,
+      required this.voteCount});
 
-  // Factory method to create Movie object from JSON
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
+      backdropPath: json['backdrop_path'],
+      id: json['id'],
+      title: json['title'],
+      originalTitle: json['original_title'],
+      overview: json['overview'],
+      posterPath: json['poster_path'],
+      mediaType: json['media_type'],
       adult: json['adult'],
-      backdropPath: json['backdrop_path'] ?? '',
-      genreIds: List<int>.from(json['genre_ids']),
-      id: json['id'] ?? 0,
-      originalLanguage: json['original_language'] ?? '',
-      originalTitle: json['original_title'] ?? '',
-      overview: json['overview'] ?? '',
-      popularity: json['popularity']?.toDouble() ?? 0.0,
-      posterPath: json['poster_path'] ?? '',
-      releaseDate: json['release_date'] ?? '',
-      title: json['title'] ?? '',
-      video: json['video'] ?? true,
-      rating: (json['vote_average'] ?? 0.0).toDouble(), // Assuming 'vote_average' is the rating field
+      originalLanguage: json['original_language'],
+      genreIds: json['genre_ids'].cast<int>(),
+      popularity: json['popularity'],
+      releaseDate: json['release_date'],
+      video: json['video'],
+      voteAverage: json['vote_average'],
+      voteCount: json['vote_count'],
     );
   }
 
-  // Method to get full URL for the poster image
-  String get fullPosterUrl => 'https://image.tmdb.org/t/p/w500$posterPath';
-
-  // Method to get full URL for the backdrop image
-  String get fullBackdropUrl => 'https://image.tmdb.org/t/p/w500$backdropPath';
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['backdrop_path'] = backdropPath;
+    data['id'] = id;
+    data['title'] = title;
+    data['original_title'] = originalTitle;
+    data['overview'] = overview;
+    data['poster_path'] = posterPath;
+    data['media_type'] = mediaType;
+    data['adult'] = adult;
+    data['original_language'] = originalLanguage;
+    data['genre_ids'] = genreIds;
+    data['popularity'] = popularity;
+    data['release_date'] = releaseDate;
+    data['video'] = video;
+    data['vote_average'] = voteAverage;
+    data['vote_count'] = voteCount;
+    return data;
+  }
 }

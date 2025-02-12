@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -12,19 +14,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
-  void _loginWithGoogle() async {
-    try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+  // void _loginWithGoogle() async {
+  //   try {
+  //     final GoogleSignIn googleSignIn = GoogleSignIn();
+  //     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-      if (googleUser != null) {
-        // Here, handle authentication with your backend using googleUser.
-        print('Google User: ${googleUser.email}');
-      }
-    } catch (error) {
-      print('Google Sign-In failed: $error');
-    }
-  }
+  //     if (googleUser != null) {
+  //       // Here, handle authentication with your backend using googleUser.
+  //       print('Google User: ${googleUser.email}');
+  //     }
+  //   } catch (error) {
+  //     print('Google Sign-In failed: $error');
+  //   }
+  // }
 
   void _login() {
     if (_formKey.currentState!.validate()) {
@@ -111,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: _loginWithGoogle,
+                onPressed: (){},
                 icon: Icon(Icons.g_mobiledata),
                 label: Text('Sign in with Google'),
                 style: ElevatedButton.styleFrom(

@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -245,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class GenrePage extends StatelessWidget {
   final String genreName;
 
-  const GenrePage({Key? key, required this.genreName}) : super(key: key);
+  const GenrePage({super.key, required this.genreName});
 
   @override
   Widget build(BuildContext context) {

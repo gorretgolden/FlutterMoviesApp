@@ -11,22 +11,18 @@ class DownloadService {
     // Download the movie file (this will give you a FileInfo object)
     final fileInfo = await cacheManager.downloadFile(movieUrl, key: title);
 
-    if (fileInfo != null) {
-      // Get the directory to store the downloaded movie
-      final directory = await getApplicationDocumentsDirectory();
-      final filePath = '${directory.path}/$title.mp4';  // Modify extension as needed
+    // Get the directory to store the downloaded movie
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/$title.mp4';  // Modify extension as needed
 
-      // Create a new file from the downloaded FileInfo object
-      final file = File(filePath);
+    // Create a new file from the downloaded FileInfo object
+    final file = File(filePath);
 
-      // Save the downloaded file to the new location
-      await file.writeAsBytes(await fileInfo.file.readAsBytes());
+    // Save the downloaded file to the new location
+    await file.writeAsBytes(await fileInfo.file.readAsBytes());
 
-      return filePath;  // Return the file path where the movie is saved
-    } else {
-      throw Exception('Failed to download movie');
+    return filePath;  // Return the file path where the movie is saved
     }
-  }
 
   // Method to fetch the list of downloaded movies from local storage
   static Future<List<DownloadedMovie>> getDownloadedMovies() async {

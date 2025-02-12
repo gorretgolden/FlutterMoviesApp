@@ -7,7 +7,7 @@ class GenreDetailsPage extends StatelessWidget {
   final List<Movie> movies; // List of movies under this genre
 
   // Constructor to pass genre name and list of movies to the page
-  GenreDetailsPage({required this.genreName, required this.movies});
+  const GenreDetailsPage({super.key, required this.genreName, required this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class GenreDetailsPage extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.network(
-                              movie.fullPosterUrl,
+                              movie.backdropPath,
                               height: 120,
                               width: 80,
                               fit: BoxFit.cover,
@@ -67,7 +67,7 @@ class GenreDetailsPage extends StatelessWidget {
                                     Icon(Icons.star, color: Colors.yellow, size: 18),
                                     SizedBox(width: 4),
                                     Text(
-                                      movie.rating.toString(),
+                                      movie.voteAverage.toString(),
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ],

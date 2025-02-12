@@ -7,7 +7,7 @@ class MovieDetailsPage extends StatelessWidget {
   final Movie movie;
 
   // Constructor to pass the movie object to the page
-  MovieDetailsPage({required this.movie});
+  const MovieDetailsPage({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class MovieDetailsPage extends StatelessWidget {
             // Movie Poster and Title Section
             Hero(
               tag: 'movie-poster-${movie.id}',
-              child: Image.network(movie.fullPosterUrl),
+              child: Image.network(movie.posterPath),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -88,7 +88,7 @@ class MovieDetailsPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            Container(
+            SizedBox(
               height: 100,
               child: ListView(
                 scrollDirection: Axis.horizontal,

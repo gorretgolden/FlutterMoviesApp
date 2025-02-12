@@ -4,12 +4,14 @@ import 'package:movies_app/screens/home/movie_details_screen.dart';
 import 'package:movies_app/services/movie_service.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Movie> _searchResults = [];
   bool _isLoading = false;
 
@@ -104,7 +106,7 @@ class _SearchPageState extends State<SearchPage> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: Image.network(
-                                        movie.fullPosterUrl,
+                                        movie.posterPath,
                                         height: 120,
                                         width: 80,
                                         fit: BoxFit.cover,
@@ -129,7 +131,7 @@ class _SearchPageState extends State<SearchPage> {
                                               Icon(Icons.star, color: Colors.yellow, size: 18),
                                               SizedBox(width: 4),
                                               Text(
-                                                movie.rating.toString(),
+                                                movie.voteAverage.toString(),
                                                 style: TextStyle(fontSize: 14),
                                               ),
                                             ],

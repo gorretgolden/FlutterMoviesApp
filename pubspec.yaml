@@ -31,14 +31,14 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.3.0
-  google_sign_in: ^5.4.3 #for google sign in
-  flutter_secure_storage: ^5.1.0 # For storing auth tokens securely
+  #google_sign_in: ^5.4.3 #for google sign in
+  flutter_secure_storage: ^9.2.4 # For storing auth tokens securely
   shared_preferences: ^2.0.9    # For storing user preferences like favorite movies
   carousel_slider: ^4.1.1       # For image carousels
   cached_network_image: ^3.2.3  # For efficient image loading and caching
   provider: ^6.1.2             # For state management
   path_provider: ^2.0.12        # For accessing local file storage
-  file_picker: ^5.3.4           # For downloading and offline access
+ # file_picker: ^5.3.4           # For downloading and offline access
   intl: ^0.17.0 #for date formating
   video_player: ^2.3.0 #to play the downloaded movie
 
