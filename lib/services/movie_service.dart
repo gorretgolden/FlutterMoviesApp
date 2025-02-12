@@ -5,27 +5,45 @@ import '../models/movie_model.dart';
 import '../models/genre.dart';
 import '../models/actor.dart';
 
-class MovieService {
+void main() async{
+ try {
+    List<Genre> genres = await fetchGenres();
+    for (var genre in genres) {
+      print("${genre.name}");
+    }
+  } catch (e) {
+    print("Error fetching genres: $e");
+  }
+}
 
-  Future<List<Movie>> fetchPopularMovies() async {
-    final response = await http.get(Uri.parse('$baseUrl/movie/popular?api_key=$apiKey'));
+// class MovieService {
+Future<List<Movie>> fetchPopularMovies() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/movie/popular?api_key=$apiKey&language=en-US&page=1'),
+      headers: {
+        "accept": "application/json",
+      },
+    );
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return List<Movie>.from(data['results'].map((movie) => Movie.fromJson(movie)));
     } else {
+      print("Error: ${response.statusCode} - ${response.body}");
       throw Exception('Failed to fetch popular movies');
     }
   }
 
-//   Future<List<Genre>> fetchGenres() async {
-//     final response = await http.get(Uri.parse('$_baseUrl/genre/movie/list?api_key=$_apiKey'));
-//     if (response.statusCode == 200) {
-//       final data = json.decode(response.body);
-//       return List<Genre>.from(data['genres'].map((genre) => Genre.fromJson(genre)));
-//     } else {
-//       throw Exception('Failed to fetch genres');
-//     }
-//   }
+
+  Future<List<Genre>> fetchGenres() async {
+    final response = await http.get(Uri.parse('$baseUrl/genre/movie/list?api_key=$apiKey'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return List<Genre>.from(data['genres'].map((genre) => Genre.fromJson(genre)));
+    } else {
+      throw Exception('Failed to fetch genres');
+    }
+  }
 
 //   Future<List<Actor>> fetchPopularActors() async {
 //     final response = await http.get(Uri.parse('$_baseUrl/person/popular?api_key=$_apiKey'));
@@ -53,4 +71,4 @@ class MovieService {
 //     }
 //   }
 // 
-}
+// }

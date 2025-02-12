@@ -1,14 +1,29 @@
+// To parse this JSON data, do
+//
+//     final genre = genreFromJson(jsonString);
 
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
 
-part 'genre.g.dart';
+Genre genreFromJson(String str) => Genre.fromJson(json.decode(str));
 
-@JsonSerializable()
+String genreToJson(Genre data) => json.encode(data.toJson());
+
 class Genre {
-  final int id;
-  final String name;
+    int? id;
+    String? name;
 
-  Genre({required this.id, required this.name});
+    Genre({
+        this.id,
+        this.name,
+    });
 
-  
+    factory Genre.fromJson(Map<String, dynamic> json) => Genre(
+        id: json["id"],
+        name: json["name"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+    };
 }
