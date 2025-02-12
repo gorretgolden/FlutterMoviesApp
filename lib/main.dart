@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/screens/home/home_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 
@@ -14,11 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movie App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => SignUpScreen(),
-      },
+      home: HomeScreen(),
+      // initialRoute: '/login',
+      // routes: {
+      //   '/login': (context) => LoginScreen(),
+      //   '/signup': (context) => SignUpScreen(),
+      // },
     );
   }
 }
