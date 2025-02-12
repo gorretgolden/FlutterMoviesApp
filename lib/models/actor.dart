@@ -1,13 +1,27 @@
+import 'package:movies_app/models/movie_model.dart';
+
 class Actor {
-  final String name;
-  final String profilePath;
+    bool adult;
+    int gender;
+    int id;
+    String knownForDepartment;
+    String name;
+    String originalName;
+    double popularity;
+    String profilePath;
+    List<Movie> movies;
 
-  Actor({required this.name, required this.profilePath});
+    Actor({
+        required this.adult,
+        required this.gender,
+        required this.id,
+        required this.knownForDepartment,
+        required this.name,
+        required this.originalName,
+        required this.popularity,
+        required this.profilePath,
+        required this.movies,
+    });
 
-  factory Actor.fromJson(Map<String, dynamic> json) {
-    return Actor(
-      name: json['name'],
-      profilePath: json['profile_path'] ?? '',
-    );
-  }
 }
+

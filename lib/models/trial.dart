@@ -1,14 +1,13 @@
 
 import 'package:json_annotation/json_annotation.dart';
-
-part 'genre.g.dart';
+part 'trial.g.dart';
 
 @JsonSerializable()
-class Genre {
+class Trial {
   final int id;
   final String name;
 
-  Genre({required this.id, required this.name});
 
+  Trial({required this.id, required this.name});
   
 }
