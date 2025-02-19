@@ -5,18 +5,19 @@ import '../models/movie_model.dart';
 import '../models/genre.dart';
 import '../models/actor.dart';
 
-void main() async{
- try {
-    List<Genre> genres = await fetchGenres();
-    for (var genre in genres) {
-      print("${genre.name}");
-    }
-  } catch (e) {
-    print("Error fetching genres: $e");
-  }
-}
+// void main() async{
+//  try {
+//     List<Genre> genres = await fetchGenres();
+//     for (var genre in genres) {
+//       print("${genre.name}");
+//     }
+//   } catch (e) {
+//     print("Error fetching genres: $e");
+//   }
+// }
 
-// class MovieService {
+
+class MovieService {
 Future<List<Movie>> fetchPopularMovies() async {
     final response = await http.get(
       Uri.parse('$baseUrl/movie/popular?api_key=$apiKey&language=en-US&page=1'),
@@ -89,4 +90,4 @@ Future<List<Movie>> fetchPopularMovies() async {
 //     }
 //   }
 // 
-// }
+ }
